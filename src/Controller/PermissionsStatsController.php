@@ -54,7 +54,7 @@ class PermissionsStatsController extends AbstractController
         // Utilisateurs avec le plus de permissions
         $topUsers = $this->entityManager->createQuery(
             'SELECT u.id, u.username, u.firstName, u.lastName, COUNT(p.id) as permissions_count
-             FROM App\Entity\User u
+             FROM ItechWorld\UserManagementBundle\Entity\User u
              LEFT JOIN u.permissions p
              GROUP BY u.id, u.username, u.firstName, u.lastName
              ORDER BY permissions_count DESC'

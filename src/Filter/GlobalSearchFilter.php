@@ -10,8 +10,15 @@ use Symfony\Component\PropertyInfo\Type;
 
 class GlobalSearchFilter extends AbstractFilter
 {
-    protected function filterProperty(string $property, $value, QueryBuilder $queryBuilder, QueryNameGeneratorInterface $queryNameGenerator, string $resourceClass, ?Operation $operation = null, array $context = []): void
-    {
+    protected function filterProperty(
+        string $property,
+        $value,
+        QueryBuilder $queryBuilder,
+        QueryNameGeneratorInterface $queryNameGenerator,
+        string $resourceClass,
+        ?Operation $operation = null,
+        array $context = []
+    ): void {
         if ($property !== 'search' || empty($value)) {
             return;
         }
@@ -41,7 +48,7 @@ class GlobalSearchFilter extends AbstractFilter
     {
         // Configuration des champs selon l'entité
         $fieldsConfig = [
-            'App\Entity\User' => [
+            'ItechWorld\UserManagementBundle\Entity\User' => [
                 $alias . '.username',
                 $alias . '.firstName',
                 $alias . '.lastName'

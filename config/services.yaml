@@ -37,6 +37,7 @@ services:
   ItechWorld\UserManagementBundle\Security\Voter\PermissionVoter:
     arguments:
       $security: '@security.helper'
+      $permissionRepository: '@ItechWorld\UserManagementBundle\Repository\PermissionRepository'
     tags: [ 'security.voter' ]
 
   # Event listeners

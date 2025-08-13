@@ -28,6 +28,31 @@ services:
     tags: [ 'controller.service_arguments' ]
     public: true
 
+  ItechWorld\UserManagementBundle\Controller\GroupPermissionsController:
+    arguments:
+      - '@doctrine.orm.entity_manager'
+    tags: [ 'controller.service_arguments' ]
+
+  ItechWorld\UserManagementBundle\Controller\GroupsStatsController:
+    arguments:
+      - '@doctrine.orm.entity_manager'
+    tags: [ 'controller.service_arguments' ]
+
+  ItechWorld\UserManagementBundle\Controller\PermissionsStatsController:
+    arguments:
+      - '@doctrine.orm.entity_manager'
+    tags: [ 'controller.service_arguments' ]
+
+  ItechWorld\UserManagementBundle\Controller\UsernameController:
+    arguments:
+      - '@ItechWorld\UserManagementBundle\Repository\UserRepository'
+    tags: [ 'controller.service_arguments' ]
+
+  ItechWorld\UserManagementBundle\Controller\UserPermissionsController:
+    arguments:
+      - '@doctrine.orm.entity_manager'
+    tags: [ 'controller.service_arguments' ]
+
   # Voters de sécurité
   ItechWorld\UserManagementBundle\Security\Voter\GroupRoleVoter:
     arguments:

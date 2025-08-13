@@ -14,11 +14,8 @@ use Symfony\Component\Security\Http\Attribute\IsGranted;
 #[Route('/api/permissions-stats', name: 'permissions_stats_')]
 class PermissionsStatsController extends AbstractController
 {
-    private EntityManagerInterface $entityManager;
-
-    public function __construct(EntityManagerInterface $entityManager)
+    public function __construct(private readonly EntityManagerInterface $entityManager)
     {
-        $this->entityManager = $entityManager;
     }
 
     #[Route('/stats', name: 'stats', methods: ['GET'])]
@@ -43,7 +40,7 @@ class PermissionsStatsController extends AbstractController
                 'resource' => $resource->getName(),
                 'description' => $resource->getDescription(),
                 'permissions_count' => $resource->getPermissions()->count(),
-                'permissions' => array_map(function($permission) {
+                'permissions' => array_map(function ($permission) {
                     return [
                         'id' => $permission->getId(),
                         'action' => $permission->getAction(),
@@ -98,7 +95,7 @@ class PermissionsStatsController extends AbstractController
             ];
         }
 
-        $permissionsHeader = array_map(function($permission) {
+        $permissionsHeader = array_map(function ($permission) {
             return [
                 'code' => $permission->getCode(),
                 'resource' => $permission->getResource()->getName(),

@@ -15,11 +15,8 @@ use Symfony\Component\Security\Http\Attribute\IsGranted;
 #[Route('/api/users/{id}/permissions', name: 'user_permissions_')]
 class UserPermissionsController extends AbstractController
 {
-    private EntityManagerInterface $entityManager;
-
-    public function __construct(EntityManagerInterface $entityManager)
+    public function __construct(private readonly EntityManagerInterface $entityManager)
     {
-        $this->entityManager = $entityManager;
     }
 
     #[Route('', name: 'get', methods: ['GET'])]
@@ -51,7 +48,8 @@ class UserPermissionsController extends AbstractController
         $data = json_decode($request->getContent(), true);
 
         if (!isset($data['permissions']) || !is_array($data['permissions'])) {
-            return $this->json(['error' => 'Le champ permissions est requis et doit être un tableau'], Response::HTTP_BAD_REQUEST);
+            return $this->json(['error' => 'Le champ permissions est requis et doit être un tableau'],
+                Response::HTTP_BAD_REQUEST);
         }
 
         // Supprimer toutes les permissions actuelles

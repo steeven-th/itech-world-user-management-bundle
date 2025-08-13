@@ -15,11 +15,8 @@ use Symfony\Component\Security\Http\Attribute\IsGranted;
 #[Route('/api/groups/{id}/permissions', name: 'group_permissions_')]
 class GroupPermissionsController extends AbstractController
 {
-    private EntityManagerInterface $entityManager;
-
-    public function __construct(EntityManagerInterface $entityManager)
+    public function __construct(private readonly EntityManagerInterface $entityManager)
     {
-        $this->entityManager = $entityManager;
     }
 
     #[Route('', name: 'get', methods: ['GET'])]
@@ -52,13 +49,15 @@ class GroupPermissionsController extends AbstractController
     {
         // Le groupe ADMIN ne peut pas perdre ses permissions
         if ($group->getName() === 'ADMIN') {
-            return $this->json(['error' => 'Les permissions du groupe ADMIN ne peuvent pas être modifiées'], Response::HTTP_FORBIDDEN);
+            return $this->json(['error' => 'Les permissions du groupe ADMIN ne peuvent pas être modifiées'],
+                Response::HTTP_FORBIDDEN);
         }
 
         $data = json_decode($request->getContent(), true);
 
         if (!isset($data['permissions']) || !is_array($data['permissions'])) {
-            return $this->json(['error' => 'Le champ permissions est requis et doit être un tableau'], Response::HTTP_BAD_REQUEST);
+            return $this->json(['error' => 'Le champ permissions est requis et doit être un tableau'],
+                Response::HTTP_BAD_REQUEST);
         }
 
         // Supprimer toutes les permissions actuelles
@@ -115,7 +114,8 @@ class GroupPermissionsController extends AbstractController
     {
         // Le groupe ADMIN ne peut pas perdre de permissions
         if ($group->getName() === 'ADMIN') {
-            return $this->json(['error' => 'Impossible de supprimer des permissions du groupe ADMIN'], Response::HTTP_FORBIDDEN);
+            return $this->json(['error' => 'Impossible de supprimer des permissions du groupe ADMIN'],
+                Response::HTTP_FORBIDDEN);
         }
 
         $permission = $this->entityManager->getRepository(Permission::class)->find($permissionId);

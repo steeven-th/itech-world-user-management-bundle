@@ -14,11 +14,8 @@ use Symfony\Component\Security\Http\Attribute\IsGranted;
 #[Route('/api/groups-stats', name: 'groups_stats_')]
 class GroupsStatsController extends AbstractController
 {
-    private EntityManagerInterface $entityManager;
-
-    public function __construct(EntityManagerInterface $entityManager)
+    public function __construct(private readonly EntityManagerInterface $entityManager)
     {
-        $this->entityManager = $entityManager;
     }
 
     #[Route('/stats', name: 'stats', methods: ['GET'])]
@@ -94,7 +91,7 @@ class GroupsStatsController extends AbstractController
             ];
         }
 
-        $permissionsHeader = array_map(function($permission) {
+        $permissionsHeader = array_map(function ($permission) {
             return [
                 'code' => $permission->getCode(),
                 'resource' => $permission->getResource()->getName(),

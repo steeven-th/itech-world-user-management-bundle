@@ -1,3 +1,9 @@
+Controllers:
+  resource:
+    path: ../src/Controller/
+    namespace: ItechWorld\UserManagementBundle\Controller
+  type: attribute
+
 api_login:
   path: /api/login
 

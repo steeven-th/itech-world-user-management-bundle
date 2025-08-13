@@ -2,3 +2,7 @@ services:
   _defaults:
     autowire: true
     autoconfigure: true
+
+  ItechWorld\UserManagementBundle\State\UserPasswordHasher:
+    bind:
+      $processor: '@api_platform.doctrine.orm.state.persist_processor'

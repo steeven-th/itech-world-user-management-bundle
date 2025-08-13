@@ -12,17 +12,16 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 
 #[AsCommand(
-    name: 'app:init-permissions',
-    description: 'Initialise les ressources et permissions de base'
+    name: 'itech-world:init-permissions',
+    description: 'Initialise les ressources et permissions de base',
+    alias: ['i-w:init-permissions']
 )]
 class InitPermissionsCommand extends Command
 {
-    private EntityManagerInterface $entityManager;
-
-    public function __construct(EntityManagerInterface $entityManager)
-    {
+    public function __construct(
+        private readonly EntityManagerInterface $entityManager
+    ) {
         parent::__construct();
-        $this->entityManager = $entityManager;
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): int

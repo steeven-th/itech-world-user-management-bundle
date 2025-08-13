@@ -14,24 +14,19 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 
 #[AsCommand(
-    name: 'app:init-groups',
+    name: 'itech-world:init-groups',
     description: 'Initialise les groupes par défaut du système',
+    alias: ['i-w:init-groups']
 )]
 class InitGroupsCommand extends Command
 {
-    private EntityManagerInterface $entityManager;
-    private GroupRepository $groupRepository;
-    private PermissionRepository $permissionRepository;
 
     public function __construct(
-        EntityManagerInterface $entityManager,
-        GroupRepository $groupRepository,
-        PermissionRepository $permissionRepository
+        private readonly EntityManagerInterface $entityManager,
+        private readonly GroupRepository $groupRepository,
+        private readonly PermissionRepository $permissionRepository
     ) {
         parent::__construct();
-        $this->entityManager = $entityManager;
-        $this->groupRepository = $groupRepository;
-        $this->permissionRepository = $permissionRepository;
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): int
@@ -117,9 +112,9 @@ class InitGroupsCommand extends Command
                              JOIN p.resource r 
                              WHERE r.name = :resourceName AND p.action = :action'
                         )
-                        ->setParameter('resourceName', $resourceName)
-                        ->setParameter('action', $action)
-                        ->getOneOrNullResult();
+                            ->setParameter('resourceName', $resourceName)
+                            ->setParameter('action', $action)
+                            ->getOneOrNullResult();
 
                         if ($permission) {
                             $group->addPermission($permission);

@@ -50,6 +50,34 @@ services:
     resource: '../src/Command/'
     tags: [ 'console.command' ]
 
+  ItechWorld\UserManagementBundle\Command\CreateUserCommand:
+    arguments:
+      - '@doctrine.orm.entity_manager'
+      - '@security.user_password_hasher'
+      - '@ItechWorld\UserManagementBundle\Repository\UserRepository'
+    tags:
+      - { name: 'console.command' }
+
+  ItechWorld\UserManagementBundle\Command\InitGroupsCommand:
+    arguments:
+      - '@doctrine.orm.entity_manager'
+      - '@ItechWorld\UserManagementBundle\Repository\GroupRepository'
+      - '@ItechWorld\UserManagementBundle\Repository\PermissionRepository'
+    tags:
+      - { name: 'console.command' }
+
+  ItechWorld\UserManagementBundle\Command\InitPermissionsCommand:
+    arguments:
+      - '@doctrine.orm.entity_manager'
+    tags:
+      - { name: 'console.command' }
+
+  ItechWorld\UserManagementBundle\Command\SyncUserGroupRolesCommand:
+    arguments:
+      - '@doctrine.orm.entity_manager'
+    tags:
+      - { name: 'console.command' }
+
   # Filtres API Platform
   ItechWorld\UserManagementBundle\Filter\GlobalSearchFilter:
     arguments:

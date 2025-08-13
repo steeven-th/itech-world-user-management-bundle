@@ -11,13 +11,14 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 
 #[AsCommand(
-    name: 'app:sync-user-group-roles',
-    description: 'Synchronise les rôles des utilisateurs avec leurs groupes'
+    name: 'itech-world:sync-user-group-roles',
+    description: 'Synchronise les rôles des utilisateurs avec leurs groupes',
+    alias: ['i-w:sync-user-group-roles']
 )]
 class SyncUserGroupRolesCommand extends Command
 {
     public function __construct(
-        private EntityManagerInterface $entityManager
+        private readonly EntityManagerInterface $entityManager
     ) {
         parent::__construct();
     }
@@ -41,23 +42,27 @@ class SyncUserGroupRolesCommand extends Command
             $newRoles = $user->getRoles();
 
             if ($originalRoles !== $newRoles) {
-                $io->text(sprintf(
-                    'User: %s | Group: %s | Roles: %s',
-                    $user->getUsername(),
-                    $user->getUserGroup()?->getName() ?? 'None',
-                    implode(', ', $newRoles)
-                ));
+                $io->text(
+                    sprintf(
+                        'User: %s | Group: %s | Roles: %s',
+                        $user->getUsername(),
+                        $user->getUserGroup()?->getName() ?? 'None',
+                        implode(', ', $newRoles)
+                    )
+                );
                 $syncCount++;
             }
         }
 
         // Pas besoin de flush car les rôles sont calculés dynamiquement
 
-        $io->success(sprintf(
-            'Synchronisation terminée. %d utilisateurs traités, %d modifiés.',
-            count($users),
-            $syncCount
-        ));
+        $io->success(
+            sprintf(
+                'Synchronisation terminée. %d utilisateurs traités, %d modifiés.',
+                count($users),
+                $syncCount
+            )
+        );
 
         $io->note('Les rôles sont maintenant synchronisés automatiquement avec les groupes.');
         $io->note('Les rôles de groupe sont calculés dynamiquement - pas de stockage en base nécessaire.');

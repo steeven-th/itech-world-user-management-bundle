@@ -22,26 +22,32 @@ use Symfony\Component\Validator\Constraints as Assert;
     operations: [
         new GetCollection(
             normalizationContext: ['groups' => ['permission:read']],
-            security: "is_granted('CAN_VIEW_PERMISSIONS')"
+            security: "is_granted('CAN_VIEW_PERMISSIONS')",
+            formats: ['json']
         ),
         new Get(
             normalizationContext: ['groups' => ['permission:read', 'permission:details']],
-            security: "is_granted('CAN_VIEW_PERMISSIONS')"
+            security: "is_granted('CAN_VIEW_PERMISSIONS')",
+            formats: ['json']
         ),
         new Post(
             denormalizationContext: ['groups' => ['permission:write']],
             normalizationContext: ['groups' => ['permission:read']],
-            security: "is_granted('CAN_CREATE_PERMISSIONS')"
+            security: "is_granted('CAN_CREATE_PERMISSIONS')",
+            formats: ['json']
         ),
         new Put(
             denormalizationContext: ['groups' => ['permission:write']],
             normalizationContext: ['groups' => ['permission:read']],
-            security: "is_granted('CAN_UPDATE_PERMISSIONS')"
+            security: "is_granted('CAN_UPDATE_PERMISSIONS')",
+            formats: ['json']
         ),
         new Delete(
-            security: "is_granted('CAN_DELETE_PERMISSIONS')"
+            security: "is_granted('CAN_DELETE_PERMISSIONS')",
+            formats: ['json']
         ),
-    ]
+    ],
+    formats: ['json']
 )]
 class Permission
 {

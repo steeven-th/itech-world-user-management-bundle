@@ -21,26 +21,32 @@ use Symfony\Component\Validator\Constraints as Assert;
     operations: [
         new GetCollection(
             normalizationContext: ['groups' => ['group:read']],
-            security: "is_granted('CAN_VIEW_PERMISSIONS')"
+            security: "is_granted('CAN_VIEW_PERMISSIONS')",
+            formats: ['json']
         ),
         new Get(
             normalizationContext: ['groups' => ['group:read', 'group:details']],
-            security: "is_granted('CAN_VIEW_PERMISSIONS')"
+            security: "is_granted('CAN_VIEW_PERMISSIONS')",
+            formats: ['json']
         ),
         new Post(
             denormalizationContext: ['groups' => ['group:write']],
             normalizationContext: ['groups' => ['group:read']],
-            security: "is_granted('CAN_CREATE_PERMISSIONS')"
+            security: "is_granted('CAN_CREATE_PERMISSIONS')",
+            formats: ['json']
         ),
         new Put(
             denormalizationContext: ['groups' => ['group:write']],
             normalizationContext: ['groups' => ['group:read']],
-            security: "is_granted('CAN_UPDATE_PERMISSIONS')"
+            security: "is_granted('CAN_UPDATE_PERMISSIONS')",
+            formats: ['json']
         ),
         new Delete(
-            security: "is_granted('CAN_DELETE_PERMISSIONS') and object.name != 'ADMIN'"
+            security: "is_granted('CAN_DELETE_PERMISSIONS') and object.name != 'ADMIN'",
+            formats: ['json']
         ),
-    ]
+    ],
+    formats: ['json']
 )]
 class Group
 {

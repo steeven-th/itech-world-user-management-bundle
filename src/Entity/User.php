@@ -26,31 +26,37 @@ use Symfony\Component\Serializer\Annotation\Groups;
     operations: [
         new GetCollection(
             normalizationContext: ['groups' => ['user:read']],
-            security: "is_granted('CAN_VIEW_USERS')"
+            security: "is_granted('CAN_VIEW_USERS')",
+            formats: ['json']
         ),
         new Get(
             normalizationContext: ['groups' => ['user:read', 'user:details']],
-            security: "is_granted('CAN_VIEW_USERS')"
+            security: "is_granted('CAN_VIEW_USERS')",
+            formats: ['json']
         ),
         new Post(
             denormalizationContext: ['groups' => ['user:write']],
             normalizationContext: ['groups' => ['user:read']],
             processor: UserPasswordHasher::class,
-            security: "is_granted('CAN_CREATE_USERS')"
+            security: "is_granted('CAN_CREATE_USERS')",
+            formats: ['json']
         ),
         new Put(
             denormalizationContext: ['groups' => ['user:write']],
             normalizationContext: ['groups' => ['user:read']],
             processor: UserPasswordHasher::class,
-            security: "is_granted('CAN_UPDATE_USERS')"
+            security: "is_granted('CAN_UPDATE_USERS')",
+            formats: ['json']
         ),
         new Patch(
             denormalizationContext: ['groups' => ['user:write']],
             normalizationContext: ['groups' => ['user:read']],
             processor: UserPasswordHasher::class,
-            security: "is_granted('CAN_UPDATE_USERS')"
+            security: "is_granted('CAN_UPDATE_USERS')",
+            formats: ['json']
         ),
-    ]
+    ],
+    formats: ['json']
 )]
 #[ApiFilter(GlobalSearchFilter::class)]
 class User implements UserInterface, PasswordAuthenticatedUserInterface
@@ -134,7 +140,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     public function getUserIdentifier(): string
     {
-        return (string) $this->username;
+        return (string)$this->username;
     }
 
     /**
@@ -185,8 +191,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     public function __serialize(): array
     {
-        $data = (array) $this;
-        $data["\0".self::class."\0password"] = hash('crc32c', $this->password);
+        $data = (array)$this;
+        $data["\0" . self::class . "\0password"] = hash('crc32c', $this->password);
 
         return $data;
     }

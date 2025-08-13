@@ -29,9 +29,14 @@ services:
     public: true
 
   # Voters de sécurité
-  ItechWorld\UserManagementBundle\Security\Voter\:
-    resource: '../src/Security/Voter/'
-    arguments: [ '@security.access.decision_manager' ]
+  ItechWorld\UserManagementBundle\Security\Voter\GroupRoleVoter:
+    arguments:
+      $security: '@security.helper'
+    tags: [ 'security.voter' ]
+
+  ItechWorld\UserManagementBundle\Security\Voter\PermissionVoter:
+    arguments:
+      $security: '@security.helper'
     tags: [ 'security.voter' ]
 
   # Event listeners

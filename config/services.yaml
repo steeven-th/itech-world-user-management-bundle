@@ -46,11 +46,7 @@ services:
       - { name: 'doctrine.event_listener', event: 'preUpdate' }
 
   # Commands
-  ItechWorld\UserManagementBundle\Command\:
-    resource: '../src/Command/'
-    tags: [ 'console.command' ]
-
-  ItechWorld\UserManagementBundle\Command\CreateUserCommand:
+  ItechWorld\UserManagementBundle\Command\CreateUsersCommand:
     arguments:
       - '@doctrine.orm.entity_manager'
       - '@security.user_password_hasher'

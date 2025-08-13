@@ -4,49 +4,49 @@ services:
     autoconfigure: false
     public: false
 
-    # Repository avec tag explicite
-    ItechWorld\UserManagementBundle\Repository\UserRepository:
-      arguments: [ '@doctrine' ]
-      tags: [ 'doctrine.repository_service' ]
+  # Repository avec tag explicite
+  ItechWorld\UserManagementBundle\Repository\UserRepository:
+    arguments: [ '@doctrine' ]
+    tags: [ 'doctrine.repository_service' ]
 
-    # Chargement automatique des repositories avec tag
-    ItechWorld\UserManagementBundle\Repository\:
-      resource: '../src/Repository/'
-      arguments: [ '@doctrine' ]
-      tags: [ 'doctrine.repository_service' ]
+  # Chargement automatique des repositories avec tag
+  ItechWorld\UserManagementBundle\Repository\:
+    resource: '../src/Repository/'
+    arguments: [ '@doctrine' ]
+    tags: [ 'doctrine.repository_service' ]
 
-    # State processor avec configuration explicite
-    ItechWorld\UserManagementBundle\State\UserPasswordHasher:
-      arguments:
-        $processor: '@api_platform.doctrine.orm.state.persist_processor'
-        $passwordHasher: '@security.user_password_hasher'
-      tags: [ 'api_platform.state_processor' ]
+  # State processor avec configuration explicite
+  ItechWorld\UserManagementBundle\State\UserPasswordHasher:
+    arguments:
+      $processor: '@api_platform.doctrine.orm.state.persist_processor'
+      $passwordHasher: '@security.user_password_hasher'
+    tags: [ 'api_platform.state_processor' ]
 
-    # Contrôleurs
-    ItechWorld\UserManagementBundle\Controller\:
-      resource: '../src/Controller/'
-      tags: [ 'controller.service_arguments' ]
-      public: true
+  # Contrôleurs
+  ItechWorld\UserManagementBundle\Controller\:
+    resource: '../src/Controller/'
+    tags: [ 'controller.service_arguments' ]
+    public: true
 
-    # Voters de sécurité
-    ItechWorld\UserManagementBundle\Security\Voter\:
-      resource: '../src/Security/Voter/'
-      arguments: [ '@security.access.decision_manager' ]
-      tags: [ 'security.voter' ]
+  # Voters de sécurité
+  ItechWorld\UserManagementBundle\Security\Voter\:
+    resource: '../src/Security/Voter/'
+    arguments: [ '@security.access.decision_manager' ]
+    tags: [ 'security.voter' ]
 
-    # Event listeners
-    ItechWorld\UserManagementBundle\EventListener\:
-      resource: '../src/EventListener/'
-      tags: [ 'kernel.event_listener' ]
+  # Event listeners
+  ItechWorld\UserManagementBundle\EventListener\:
+    resource: '../src/EventListener/'
+    tags: [ 'kernel.event_listener' ]
 
-    # Commands
-    ItechWorld\UserManagementBundle\Command\:
-      resource: '../src/Command/'
-      tags: [ 'console.command' ]
+  # Commands
+  ItechWorld\UserManagementBundle\Command\:
+    resource: '../src/Command/'
+    tags: [ 'console.command' ]
 
-    # Filtres API Platform
-    ItechWorld\UserManagementBundle\Filter\GlobalSearchFilter:
-      arguments:
-        $nameConverter: '@?api_platform.name_converter'
-        $logger: '@?logger'
-      tags: [ 'api_platform.filter' ]
+  # Filtres API Platform
+  ItechWorld\UserManagementBundle\Filter\GlobalSearchFilter:
+    arguments:
+      $nameConverter: '@?api_platform.name_converter'
+      $logger: '@?logger'
+    tags: [ 'api_platform.filter' ]

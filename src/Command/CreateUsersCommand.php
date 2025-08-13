@@ -17,7 +17,7 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 #[AsCommand(
     name: 'itech-world:create-user',
     description: 'Crée un nouvel utilisateur',
-    alias: ['i-w:create-users']
+    aliases: ['i-w:create-users']
 )]
 class CreateUsersCommand extends Command
 {

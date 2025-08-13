@@ -14,7 +14,7 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 #[AsCommand(
     name: 'itech-world:init-permissions',
     description: 'Initialise les ressources et permissions de base',
-    alias: ['i-w:init-permissions']
+    aliases: ['i-w:init-permissions']
 )]
 class InitPermissionsCommand extends Command
 {

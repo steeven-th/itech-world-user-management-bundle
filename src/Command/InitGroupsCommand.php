@@ -16,7 +16,7 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 #[AsCommand(
     name: 'itech-world:init-groups',
     description: 'Initialise les groupes par défaut du système',
-    alias: ['i-w:init-groups']
+    aliases: ['i-w:init-groups']
 )]
 class InitGroupsCommand extends Command
 {

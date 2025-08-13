@@ -13,7 +13,7 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 #[AsCommand(
     name: 'itech-world:sync-user-group-roles',
     description: 'Synchronise les rôles des utilisateurs avec leurs groupes',
-    alias: ['i-w:sync-user-group-roles']
+    aliases: ['i-w:sync-user-group-roles']
 )]
 class SyncUserGroupRolesCommand extends Command
 {

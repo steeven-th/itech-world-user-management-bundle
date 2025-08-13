@@ -1,6 +1,6 @@
 {
   "name": "itech-world/user-management-bundle",
-  "description": "ItechWorld bundle for user and permission management It's gonna be on this channel",
+  "description": "User Management Bundle for API Platform - Symfony",
   "type": "symfony-bundle",
   "license": "MIT",
   "homepage": "https://github.com/steeven-th/itech-world-user-management-bundle",

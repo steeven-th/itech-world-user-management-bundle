@@ -23,35 +23,45 @@ services:
     tags: [ 'api_platform.state_processor' ]
 
   # Contrôleurs
-  ItechWorld\UserManagementBundle\Controller\:
-    resource: '../src/Controller/'
-    tags: [ 'controller.service_arguments' ]
-    public: true
-
   ItechWorld\UserManagementBundle\Controller\GroupPermissionsController:
     arguments:
       - '@doctrine.orm.entity_manager'
+    calls:
+      - [ setContainer, [ '@service_container' ] ]
     tags: [ 'controller.service_arguments' ]
+    public: true
 
   ItechWorld\UserManagementBundle\Controller\GroupsStatsController:
     arguments:
       - '@doctrine.orm.entity_manager'
+    calls:
+      - [ setContainer, [ '@service_container' ] ]
     tags: [ 'controller.service_arguments' ]
+    public: true
 
   ItechWorld\UserManagementBundle\Controller\PermissionsStatsController:
     arguments:
       - '@doctrine.orm.entity_manager'
+    calls:
+      - [ setContainer, [ '@service_container' ] ]
     tags: [ 'controller.service_arguments' ]
+    public: true
 
   ItechWorld\UserManagementBundle\Controller\UsernameController:
     arguments:
       - '@ItechWorld\UserManagementBundle\Repository\UserRepository'
+    calls:
+      - [ setContainer, [ '@service_container' ] ]
     tags: [ 'controller.service_arguments' ]
+    public: true
 
   ItechWorld\UserManagementBundle\Controller\UserPermissionsController:
     arguments:
       - '@doctrine.orm.entity_manager'
+    calls:
+      - [ setContainer, [ '@service_container' ] ]
     tags: [ 'controller.service_arguments' ]
+    public: true
 
   # Voters de sécurité
   ItechWorld\UserManagementBundle\Security\Voter\GroupRoleVoter:

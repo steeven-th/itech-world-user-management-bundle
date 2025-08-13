@@ -1,0 +1,54 @@
+{
+  "name": "itech-world/user-management-bundle",
+  "description": "Bundle ItechWorld pour la gestion des utilisateurs et permissions",
+  "type": "symfony-bundle",
+  "license": "MIT",
+  "homepage": "https://github.com/steeven-th/itech-world-user-management-bundle",
+  "keywords": [
+    "symfony",
+    "bundle",
+    "user-management",
+    "authentication",
+    "authorization",
+    "roles",
+    "permissions",
+    "api-platform",
+    "jwt"
+  ],
+  "authors": [
+    {
+      "name": "Steeven THOMAS",
+      "homepage": "https://github.com/steeven-th"
+    }
+  ],
+  "support": {
+    "issues": "https://github.com/steeven-th/itech-world-user-management-bundle/issues",
+    "source": "https://github.com/steeven-th/itech-world-user-management-bundle"
+  },
+  "require": {
+    "php": ">=8.2",
+    "api-platform/symfony": "^4.1",
+    "doctrine/doctrine-bundle": "^2.0",
+    "doctrine/doctrine-migrations-bundle": "^3.4",
+    "doctrine/orm": "^3.0",
+    "lexik/jwt-authentication-bundle": "^3.1",
+    "nelmio/cors-bundle": "^2.5",
+    "symfony/framework-bundle": "^7.3",
+    "symfony/security-bundle": "^7.3"
+  },
+  "autoload": {
+    "psr-4": {
+      "ItechWorld\\UserManagementBundle\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "ItechWorld\\UserManagementBundle\\Tests\\": "tests/"
+    }
+  },
+  "extra": {
+    "symfony": {
+      "alias": "itech_user_management"
+    }
+  }
+}

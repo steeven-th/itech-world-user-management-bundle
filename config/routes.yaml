@@ -1,0 +1,7 @@
+api_login:
+  path: /api/login
+
+when@dev:
+  api_doc:
+    path: /docs
+    controller: api_platform.action.documentation

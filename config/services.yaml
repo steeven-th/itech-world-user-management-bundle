@@ -35,9 +35,9 @@ services:
     tags: [ 'security.voter' ]
 
   # Event listeners
-  ItechWorld\UserManagementBundle\EventListener\:
-    resource: '../src/EventListener/'
-    tags: [ 'kernel.event_listener' ]
+  ItechWorld\UserManagementBundle\EventListener\UserGroupSyncListener:
+    tags:
+      - { name: 'doctrine.event_listener', event: 'preUpdate' }
 
   # Commands
   ItechWorld\UserManagementBundle\Command\:

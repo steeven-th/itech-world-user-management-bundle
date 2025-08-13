@@ -21,26 +21,32 @@ use Symfony\Component\Validator\Constraints as Assert;
     operations: [
         new GetCollection(
             normalizationContext: ['groups' => ['resource:read']],
-            security: "is_granted('CAN_VIEW_RESOURCES')"
+            security: "is_granted('CAN_VIEW_RESOURCES')",
+            formats: ['json']
         ),
         new Get(
             normalizationContext: ['groups' => ['resource:read', 'resource:details']],
-            security: "is_granted('CAN_VIEW_RESOURCES')"
+            security: "is_granted('CAN_VIEW_RESOURCES')",
+            formats: ['json']
         ),
         new Post(
             denormalizationContext: ['groups' => ['resource:write']],
             normalizationContext: ['groups' => ['resource:read']],
-            security: "is_granted('CAN_CREATE_RESOURCES')"
+            security: "is_granted('CAN_CREATE_RESOURCES')",
+            formats: ['json']
         ),
         new Put(
             denormalizationContext: ['groups' => ['resource:write']],
             normalizationContext: ['groups' => ['resource:read']],
-            security: "is_granted('CAN_UPDATE_RESOURCES')"
+            security: "is_granted('CAN_UPDATE_RESOURCES')",
+            formats: ['json']
         ),
         new Delete(
-            security: "is_granted('CAN_DELETE_RESOURCES')"
+            security: "is_granted('CAN_DELETE_RESOURCES')",
+            formats: ['json']
         ),
-    ]
+    ],
+    formats: ['json']
 )]
 class Resource
 {

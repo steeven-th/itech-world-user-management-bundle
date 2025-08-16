@@ -12,6 +12,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use ItechWorld\UserManagementBundle\Repository\GroupRepository;
+use ItechWorld\UserManagementBundle\State\GroupSafeProcessor;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -36,6 +37,7 @@ use Symfony\Component\Validator\Constraints as Assert;
             formats: ['json']
         ),
         new Put(
+            processor: GroupSafeProcessor::class,
             denormalizationContext: ['groups' => ['group:write']],
             normalizationContext: ['groups' => ['group:read']],
             security: "is_granted('CAN_UPDATE_PERMISSIONS')",

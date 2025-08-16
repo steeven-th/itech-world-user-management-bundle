@@ -22,6 +22,14 @@ services:
       $passwordHasher: '@security.user_password_hasher'
     tags: [ 'api_platform.state_processor' ]
 
+  ItechWorld\UserManagementBundle\State\GroupSafeProcessor:
+    decorates: 'api_platform.doctrine.orm.state.persist_processor'
+    arguments:
+      $entityManager: '@doctrine.orm.entity_manager'
+      $decorated: '@.inner'
+    tags:
+      - { name: 'api_platform.state_processor' }
+
   # Contrôleurs
   ItechWorld\UserManagementBundle\Controller\GroupPermissionsController:
     arguments:
@@ -115,3 +123,14 @@ services:
       $nameConverter: '@?api_platform.name_converter'
       $logger: '@?logger'
     tags: [ 'api_platform.filter' ]
+
+  # Event subscribers
+  ItechWorld\UserManagementBundle\EventSubscriber\SwaggerSubscriber:
+    tags:
+      - { name: kernel.event_subscriber }
+
+  # OpenAPI factory decoration
+  ItechWorld\UserManagementBundle\OpenApi\OpenApiFactory:
+    decorates: 'api_platform.openapi.factory'
+    arguments: [ '@.inner' ]
+    autoconfigure: false
